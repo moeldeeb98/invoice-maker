@@ -6,6 +6,7 @@ import Dates from "./components/Dates";
 import Table from "./components/Table";
 import Notes from "./components/Notes";
 import Footer from "./components/Footer";
+import TableForm from "./components/TableForm";
 
 function App() {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -22,6 +23,11 @@ function App() {
   const [invoiceDate, setInvoiceDate] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [notes, setNotes] = useState("");
+  const [description, setDescription] = useState("");
+  const [quntity, setQuntity] = useState("");
+  const [price, setPrice] = useState("");
+  const [amount, setAmount] = useState("");
+  const [list, setList] = useState([]);
 
   return (
     <>
@@ -29,26 +35,28 @@ function App() {
         {showInvoice ? (
           <div>
             <Header />
-            <MainDetails name={name} address={address} />
-            <ClientDetails
-              clientName={clientName}
-              clientAddress={clientAddress}
-            />
-            <Dates
-              invoiceNumber={invoiceNumber}
-              invoiceDate={invoiceDate}
-              dueDate={dueDate}
-            />
-            <Table />
-            <Notes notes={notes} />
-            <Footer
-              name={name}
-              email={email}
-              phone={phone}
-              bankName={bankName}
-              bankAccount={bankAccount}
-              website={website}
-            />
+            <div id="the-invoice">
+              <MainDetails name={name} address={address} />
+              <ClientDetails
+                clientName={clientName}
+                clientAddress={clientAddress}
+              />
+              <Dates
+                invoiceNumber={invoiceNumber}
+                invoiceDate={invoiceDate}
+                dueDate={dueDate}
+              />
+              <Table list={list} />
+              <Notes notes={notes} />
+              <Footer
+                name={name}
+                email={email}
+                phone={phone}
+                bankName={bankName}
+                bankAccount={bankAccount}
+                website={website}
+              />
+            </div>
             <button
               className=" mt-5 bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
               onClick={() => setShowInvoice(false)}
@@ -220,6 +228,23 @@ function App() {
                   onChange={(e) => setDueDate(e.target.value)}
                 />
               </div>
+            </article>
+
+            <article className="mb-10">
+              <TableForm
+                description={description}
+                setDescription={setDescription}
+                quntity={quntity}
+                setQuntity={setQuntity}
+                price={price}
+                setPrice={setPrice}
+                amount={amount}
+                setAmount={setAmount}
+                list={list}
+                setList={setList}
+              />
+
+              <Table list={list} />
             </article>
 
             <label htmlFor="notes">Additional Notes</label>
