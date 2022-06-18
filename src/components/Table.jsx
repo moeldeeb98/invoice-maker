@@ -1,6 +1,7 @@
 import React from "react";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
-function Table({ list }) {
+function Table({ hasActions, list, total, editRow, deleteRow }) {
   return (
     <>
       <table width="100%">
@@ -19,10 +20,29 @@ function Table({ list }) {
               <td>{item.quntity}</td>
               <td>{item.price}</td>
               <td>{item.amount}</td>
+              {hasActions && (
+                <>
+                  <td>
+                    <button onClick={() => deleteRow(item.id)}>
+                      <AiOutlineDelete className="text-red-500 font-bold text-xl" />
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => editRow(item.id)}>
+                      <AiOutlineEdit className="text-green-500 font-bold text-xl" />
+                    </button>
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
       </table>
+      <div>
+        <h2 className="flex items-end justify-end text-gray-800 font-bold text-2xl my-2">
+          Total. {total.toLocaleString()}
+        </h2>
+      </div>
     </>
   );
 }

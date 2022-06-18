@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Table from "./Table";
 import { v4 as uuid } from "uuid";
 
 function TableForm({
@@ -12,7 +13,10 @@ function TableForm({
   setAmount,
   list,
   setList,
+  total,
+  setTotal,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     setAmount(price * quntity);
   }, [setAmount, price, quntity]);
@@ -33,6 +37,24 @@ function TableForm({
     setPrice("");
 
     setList([...list, newItem]);
+    setTotal(total + amount);
+    setIsEditing(false);
+  };
+
+  const deleteRow = (id) => {
+    const deletingRow = list.find((row) => row.id === id);
+    setList(list.filter((row) => row.id !== id));
+    setTotal(total - deletingRow.amount);
+  };
+
+  const editRow = (id) => {
+    const editingRow = list.find((row) => row.id === id);
+    setIsEditing(true);
+    setList(list.filter((row) => row.id !== id));
+    setDescription(editingRow.description);
+    setQuntity(editingRow.quntity);
+    setPrice(editingRow.price);
+    setTotal(total - editingRow.amount);
   };
   return (
     <>
@@ -79,13 +101,29 @@ function TableForm({
             <p>{amount}</p>
           </div>
         </div>
-        <button
-          className="mb-5 bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
-          type="submit"
-        >
-          Add item
-        </button>
+        {isEditing ? (
+          <button
+            className="mb-5 bg-green-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-green-500 hover:bg-transparent hover:text-green-500 transition-all duration-300"
+            type="submit"
+          >
+            Update item
+          </button>
+        ) : (
+          <button
+            className="mb-5 bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
+            type="submit"
+          >
+            Add item
+          </button>
+        )}
       </form>
+      <Table
+        hasActions={true}
+        list={list}
+        total={total}
+        editRow={editRow}
+        deleteRow={deleteRow}
+      />
     </>
   );
 }
