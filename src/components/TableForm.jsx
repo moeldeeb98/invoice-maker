@@ -23,22 +23,26 @@ function TableForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newItem = {
-      id: uuid(),
-      description,
-      quntity,
-      amount,
-      price,
-    };
+    if (!description || !price || !quntity) {
+      alert("Please fill in all inputs");
+    } else {
+      const newItem = {
+        id: uuid(),
+        description,
+        quntity,
+        amount,
+        price,
+      };
 
-    setDescription("");
-    setQuntity("");
-    setAmount("");
-    setPrice("");
+      setDescription("");
+      setQuntity("");
+      setAmount("");
+      setPrice("");
 
-    setList([...list, newItem]);
-    setTotal(total + amount);
-    setIsEditing(false);
+      setList([...list, newItem]);
+      setTotal(total + amount);
+      setIsEditing(false);
+    }
   };
 
   const deleteRow = (id) => {

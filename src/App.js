@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./components/Header";
 import MainDetails from "./components/MainDetails";
 import ClientDetails from "./components/ClientDetails";
@@ -7,6 +7,7 @@ import Table from "./components/Table";
 import Notes from "./components/Notes";
 import Footer from "./components/Footer";
 import TableForm from "./components/TableForm";
+import ReactToPrint from "react-to-print";
 
 function App() {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -30,13 +31,23 @@ function App() {
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const invoiceRef = useRef();
+
   return (
     <>
       <main className="m-5 p-5 md:max-w-xl md:mx-auto lg:max-w-2xl xl:max-w-4xl bg-white rounded shadow">
         {showInvoice ? (
           <div>
-            <Header />
-            <div id="the-invoice">
+            {/* <Header /> */}
+            <ReactToPrint
+              trigger={() => (
+                <button className="bg-gray-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-gray-500 hover:bg-transparent hover:text-gray-500 transition-all duration-300">
+                  Print / Download
+                </button>
+              )}
+              content={() => invoiceRef.current}
+            />
+            <div ref={invoiceRef} className="p-5">
               <MainDetails name={name} address={address} />
               <ClientDetails
                 clientName={clientName}
