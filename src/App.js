@@ -25,11 +25,12 @@ function App() {
   const [dueDate, setDueDate] = useState("");
   const [notes, setNotes] = useState("");
   const [description, setDescription] = useState("");
-  const [quntity, setQuntity] = useState("");
-  const [price, setPrice] = useState("");
-  const [amount, setAmount] = useState("");
+  const [quntity, setQuntity] = useState(1);
+  const [price, setPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
+  const [tax, setTax] = useState(0);
 
   const invoiceRef = useRef();
 
@@ -58,7 +59,7 @@ function App() {
                 invoiceDate={invoiceDate}
                 dueDate={dueDate}
               />
-              <Table list={list} total={total} />
+              <Table list={list} total={total} tax={tax} />
               <Notes notes={notes} />
               <Footer
                 name={name}
@@ -85,7 +86,7 @@ function App() {
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Enter your name"
+                  placeholder="Your full name"
                   autoComplete="off"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -97,7 +98,7 @@ function App() {
                   type="text"
                   name="address"
                   id="address"
-                  placeholder="Enter your address"
+                  placeholder="Your address"
                   autoComplete="off"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
@@ -147,26 +148,24 @@ function App() {
 
             <article className="md:grid grid-cols-2 gap-10">
               <div className="flex flex-col">
-                <label htmlFor="bankName">Enter your bank name</label>
+                <label htmlFor="bankName">Your bank name</label>
                 <input
                   type="text"
                   name="bankName"
                   id="bankName"
-                  placeholder="Enter your bank name"
+                  placeholder="Your bank name"
                   autoComplete="off"
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="bankAccount">
-                  Enter your bank account number
-                </label>
+                <label htmlFor="bankAccount">Your bank account number</label>
                 <input
                   type="text"
                   name="bankAccount"
                   id="bankAccount"
-                  placeholder="Enter your bank account number"
+                  placeholder="Your bank account number"
                   autoComplete="off"
                   value={bankAccount}
                   onChange={(e) => setBankAccount(e.target.value)}
@@ -176,26 +175,24 @@ function App() {
 
             <article className="md:grid grid-cols-2 gap-10 md:mt-16">
               <div className="flex flex-col">
-                <label htmlFor="clientName">Enter your client's name</label>
+                <label htmlFor="clientName">Client's name</label>
                 <input
                   type="text"
                   name="clientName"
                   id="clientName"
-                  placeholder="Enter your client's name"
+                  placeholder="Client's name"
                   autoComplete="off"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="clientAddress">
-                  Enter your client's address
-                </label>
+                <label htmlFor="clientAddress">Client's address</label>
                 <input
                   type="text"
                   name="clientAddress"
                   id="clientAddress"
-                  placeholder="Enter your client's address"
+                  placeholder="Client's address"
                   autoComplete="off"
                   value={clientAddress}
                   onChange={(e) => setClientAddress(e.target.value)}
@@ -256,6 +253,8 @@ function App() {
                 setList={setList}
                 total={total}
                 setTotal={setTotal}
+                tax={tax}
+                setTax={setTax}
               />
             </article>
 

@@ -15,11 +15,23 @@ function TableForm({
   setList,
   total,
   setTotal,
+  tax,
+  setTax,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     setAmount(price * quntity);
   }, [setAmount, price, quntity]);
+
+  useEffect(() => {
+    let sum = 0;
+    for (let i = 0; i < list.length; i++) {
+      sum += list[i].amount;
+    }
+    const tax = (sum * 14) / 100;
+    setTax(tax);
+    setTotal(sum + tax);
+  }, [list.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,12 +47,10 @@ function TableForm({
       };
 
       setDescription("");
-      setQuntity("");
-      setAmount("");
-      setPrice("");
+      setQuntity(1);
+      setPrice(0);
 
       setList([...list, newItem]);
-      setTotal(total + amount);
       setIsEditing(false);
     }
   };
@@ -48,7 +58,6 @@ function TableForm({
   const deleteRow = (id) => {
     const deletingRow = list.find((row) => row.id === id);
     setList(list.filter((row) => row.id !== id));
-    setTotal(total - deletingRow.amount);
   };
 
   const editRow = (id) => {
@@ -58,7 +67,6 @@ function TableForm({
     setDescription(editingRow.description);
     setQuntity(editingRow.quntity);
     setPrice(editingRow.price);
-    setTotal(total - editingRow.amount);
   };
   return (
     <>
@@ -79,7 +87,7 @@ function TableForm({
           <div className="flex flex-col">
             <label htmlFor="quntity">Quntity</label>
             <input
-              type="text"
+              type="number"
               name="quntity"
               id="quntity"
               placeholder="Quntity"
@@ -91,7 +99,7 @@ function TableForm({
           <div className="flex flex-col">
             <label htmlFor="price">Price</label>
             <input
-              type="text"
+              type="number"
               name="price"
               id="price"
               placeholder="Price"
@@ -102,7 +110,7 @@ function TableForm({
           </div>
           <div className="flex flex-col">
             <label htmlFor="amount">Amount</label>
-            <p>{amount}</p>
+            <p>{amount.toLocaleString()}</p>
           </div>
         </div>
         {isEditing ? (
@@ -127,6 +135,7 @@ function TableForm({
         total={total}
         editRow={editRow}
         deleteRow={deleteRow}
+        tax={tax}
       />
     </>
   );
