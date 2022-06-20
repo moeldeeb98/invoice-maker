@@ -35,7 +35,7 @@ function App() {
 
   const invoiceRef = useRef();
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     document.querySelector("html").dir = i18n.language === "ar" ? "rtl" : "ltr";
@@ -50,7 +50,7 @@ function App() {
             <ReactToPrint
               trigger={() => (
                 <button className="bg-gray-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-gray-500 hover:bg-transparent hover:text-gray-500 transition-all duration-300">
-                  Print / Download
+                  {t("print")}
                 </button>
               )}
               content={() => invoiceRef.current}
@@ -81,7 +81,7 @@ function App() {
               className=" mt-5 bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
               onClick={() => setShowInvoice(false)}
             >
-              Edit Information
+              {t("edit-information")}
             </button>
           </div>
         ) : (

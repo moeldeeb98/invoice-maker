@@ -20,5 +20,10 @@
   "tax-14": "Tax(14%)",
   "sub-total": "Subtotal",
   "additional-notes": "Additional Notes",
-  "preview-invoice": "Preview Invoice"
+  "preview-invoice": "Preview Invoice",
+  "print": "Print",
+  "name": "Name",
+  "bank": "Bank",
+  "account-holder": "Account Holder",
+  "edit-information": "Edit Information"
 }

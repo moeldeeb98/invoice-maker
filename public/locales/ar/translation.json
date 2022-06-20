@@ -20,5 +20,10 @@
   "tax-14": "ضريبة(14%)",
   "sub-total": "الإجمالى",
   "additional-notes": "ملاحظات إضافية",
-  "preview-invoice": "عرض الفاتورة"
+  "preview-invoice": "عرض الفاتورة",
+  "print": "طباعة",
+  "name": "الإسم",
+  "bank": "بنك",
+  "account-holder": "مالك الحساب",
+  "edit-information": "تعديل البيانات"
 }
