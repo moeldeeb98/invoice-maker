@@ -18,11 +18,13 @@ function MultiLang() {
               <div className="flex items-center justify-center">
                 <b>
                   <span
-                    class={`flag fi fi-${Lanuages[i18n.language].country_code}`}
+                    className={`flag fi fi-${
+                      Lanuages[i18n.language].country_code
+                    }`}
                   ></span>{" "}
-                  <span>{i18n.language}</span>
+                  <span style={{ color: "#5139B8" }}>{i18n.language}</span>
                 </b>
-                <FaAngleDown className="mt-1" />
+                <FaAngleDown style={{ color: "#5139B8" }} className="mt-1" />
               </div>
 
               <ul>
@@ -32,9 +34,9 @@ function MultiLang() {
                   }}
                 >
                   <span
-                    class={`flag fi fi-${Lanuages["en"].country_code}`}
+                    className={`flag fi fi-${Lanuages["en"].country_code}`}
                   ></span>
-                  <span className={`${i18n.language == "en"} ? 'active' : ''`}>
+                  <span className={`${i18n.language == "en" ? "active" : ""} `}>
                     {Lanuages["en"].name}
                   </span>
                 </li>
@@ -44,9 +46,9 @@ function MultiLang() {
                   }}
                 >
                   <span
-                    class={`flag fi fi-${Lanuages["ar"].country_code}`}
+                    className={`flag fi fi-${Lanuages["ar"].country_code}`}
                   ></span>
-                  <span className={`${i18n.language == "ar"} ? 'active' : ''`}>
+                  <span className={`${i18n.language == "ar" ? "active" : ""} `}>
                     {Lanuages["ar"].name}
                   </span>
                 </li>
