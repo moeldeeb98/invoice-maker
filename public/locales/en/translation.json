@@ -1,3 +1,24 @@
 {
-  "title": "Title..."
+  "full-name": "Full Name",
+  "address": "Address",
+  "email": "Email",
+  "phone": "Phone",
+  "website": "Website",
+  "bank-name": "Bank Name",
+  "bank-account": "Bank Account Number",
+  "client-name": "Client's Name",
+  "client-address": "Client's Address",
+  "invoice-number": "Invoice Number",
+  "invoice-date": "Invoice Date",
+  "due-date": "Due Date",
+  "description": "Description",
+  "quntity": "Quntity",
+  "price": "Price",
+  "amount": "Amount",
+  "update-item": "Update Item",
+  "add-item": "Add Item",
+  "tax-14": "Tax(14%)",
+  "sub-total": "Subtotal",
+  "additional-notes": "Additional Notes",
+  "preview-invoice": "Preview Invoice"
 }

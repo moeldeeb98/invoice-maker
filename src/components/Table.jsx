@@ -1,16 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
+  const { t } = useTranslation();
   return (
     <>
       <table width="100%">
         <thead>
           <tr className="bg-gray-100 p-1">
-            <td className="font-bold">Description</td>
-            <td className="font-bold text-center">Quntity</td>
-            <td className="font-bold text-center">Price</td>
-            <td className="font-bold text-center">Amount</td>
+            <td className="font-bold">{t("description")}</td>
+            <td className="font-bold text-center">{t("quntity")}</td>
+            <td className="font-bold text-center">{t("price")}</td>
+            <td className="font-bold text-center">{t("amount")}</td>
             {hasActions && (
               <>
                 <td></td>
@@ -45,7 +47,7 @@ function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
           <tr>
             <td colSpan={2}></td>
             <td className="font-bold text-center border border-gray-400">
-              Tax(14%):
+              {t("tax-14")} :
             </td>
             <td className="font-bold text-center border border-gray-400">
               E&pound; {tax.toLocaleString()}
@@ -54,7 +56,7 @@ function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
           <tr>
             <td colSpan={2}></td>
             <td className="font-bold text-center border border-gray-400">
-              Total:
+              {t("sub-total")} :
             </td>
             <td className="font-bold text-center border border-gray-400">
               E&pound; {total.toLocaleString()}

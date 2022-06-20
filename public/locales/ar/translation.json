@@ -1,3 +1,24 @@
 {
-  "title": "العنوان"
+  "full-name": "الإسم بالكامل",
+  "address": "العنوان",
+  "email": "البريد الإلكترونى",
+  "phone": "رقم الموبيل",
+  "website": "الموقع",
+  "bank-name": "إسم البنك",
+  "bank-account": "رقم الحساب البنكى",
+  "client-name": "إسم العميل",
+  "client-address": "عنوان العميل",
+  "invoice-number": "رقم الفاتورة",
+  "invoice-date": "تاريخ الفاتورة",
+  "due-date": "تاريخ الاستحقاق",
+  "description": "الوصف",
+  "quntity": "الكمية",
+  "price": "السعر",
+  "amount": "الإجمالى",
+  "update-item": "تعديل الصنف",
+  "add-item": "إضافة صنف",
+  "tax-14": "ضريبة(14%)",
+  "sub-total": "الإجمالى",
+  "additional-notes": "ملاحظات إضافية",
+  "preview-invoice": "عرض الفاتورة"
 }

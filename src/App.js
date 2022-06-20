@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import Header from "./components/Header";
 import MainDetails from "./components/MainDetails";
 import ClientDetails from "./components/ClientDetails";
@@ -6,10 +6,9 @@ import Dates from "./components/Dates";
 import Table from "./components/Table";
 import Notes from "./components/Notes";
 import Footer from "./components/Footer";
-import TableForm from "./components/TableForm";
 import ReactToPrint from "react-to-print";
-import MultiLang from "./components/MultiLang";
 import { useTranslation } from "react-i18next";
+import InfoForm from "./components/InfoForm";
 
 function App() {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -36,9 +35,12 @@ function App() {
 
   const invoiceRef = useRef();
 
-  const { t, i18n, language } = useTranslation();
+  const { i18n } = useTranslation();
 
-  console.log("lang", i18n.language);
+  useEffect(() => {
+    document.querySelector("html").dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
+
   return (
     <>
       <main className="m-5 p-5 md:max-w-xl md:mx-auto lg:max-w-2xl xl:max-w-4xl bg-white rounded shadow">
@@ -83,224 +85,49 @@ function App() {
             </button>
           </div>
         ) : (
-          <div className="flex flex-col justify-center">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <img
-                  src="/images/logo.png"
-                  className="md:w-20 w-10"
-                  alt="INVOICE MAKER"
-                />
-              </div>
-              <div
-                style={{ color: "#5139B8" }}
-                className="font-bold md:text-3xl text-sm"
-              >
-                INVOICE MAKER
-              </div>
-              <div>
-                <MultiLang />
-              </div>
-            </div>
-
-            <div>{t("title")}</div>
-            <article className="md:grid grid-cols-2 gap-10">
-              <div className="flex flex-col">
-                <label htmlFor="name">Your full name</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Your full name"
-                  autoComplete="off"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="address">Your address</label>
-                <input
-                  type="text"
-                  name="address"
-                  id="address"
-                  placeholder="Your address"
-                  autoComplete="off"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </div>
-            </article>
-
-            <article className="md:grid grid-cols-3 gap-10">
-              <div className="flex flex-col">
-                <label htmlFor="email">Your email</label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Your email"
-                  autoComplete="off"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="phone">Your phone</label>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  placeholder="Your phone number"
-                  autoComplete="off"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="website">Your website</label>
-                <input
-                  type="url"
-                  name="website"
-                  id="website"
-                  placeholder="Your website"
-                  autoComplete="off"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                />
-              </div>
-            </article>
-
-            <article className="md:grid grid-cols-2 gap-10">
-              <div className="flex flex-col">
-                <label htmlFor="bankName">Your bank name</label>
-                <input
-                  type="text"
-                  name="bankName"
-                  id="bankName"
-                  placeholder="Your bank name"
-                  autoComplete="off"
-                  value={bankName}
-                  onChange={(e) => setBankName(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="bankAccount">Your bank account number</label>
-                <input
-                  type="text"
-                  name="bankAccount"
-                  id="bankAccount"
-                  placeholder="Your bank account number"
-                  autoComplete="off"
-                  value={bankAccount}
-                  onChange={(e) => setBankAccount(e.target.value)}
-                />
-              </div>
-            </article>
-
-            <article className="md:grid grid-cols-2 gap-10 md:mt-16">
-              <div className="flex flex-col">
-                <label htmlFor="clientName">Client's name</label>
-                <input
-                  type="text"
-                  name="clientName"
-                  id="clientName"
-                  placeholder="Client's name"
-                  autoComplete="off"
-                  value={clientName}
-                  onChange={(e) => setClientName(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="clientAddress">Client's address</label>
-                <input
-                  type="text"
-                  name="clientAddress"
-                  id="clientAddress"
-                  placeholder="Client's address"
-                  autoComplete="off"
-                  value={clientAddress}
-                  onChange={(e) => setClientAddress(e.target.value)}
-                />
-              </div>
-            </article>
-
-            <article className="md:grid grid-cols-3 gap-10">
-              <div className="flex flex-col">
-                <label htmlFor="invoiceNumber">Invoice number</label>
-                <input
-                  type="text"
-                  name="invoiceNumber"
-                  id="invoiceNumber"
-                  placeholder="Invoice number"
-                  autoComplete="off"
-                  value={invoiceNumber}
-                  onChange={(e) => setInvoiceNumber(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="invoiceDate">Invoice date</label>
-                <input
-                  type="date"
-                  name="invoiceDate"
-                  id="invoiceDate"
-                  placeholder="Invoice date"
-                  autoComplete="off"
-                  value={invoiceDate}
-                  onChange={(e) => setInvoiceDate(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="dueDate">Due date</label>
-                <input
-                  type="date"
-                  name="dueDate"
-                  id="dueDate"
-                  placeholder="Due date"
-                  autoComplete="off"
-                  value={dueDate}
-                  onChange={(e) => setDueDate(e.target.value)}
-                />
-              </div>
-            </article>
-
-            <article className="mb-10">
-              <TableForm
-                description={description}
-                setDescription={setDescription}
-                quntity={quntity}
-                setQuntity={setQuntity}
-                price={price}
-                setPrice={setPrice}
-                amount={amount}
-                setAmount={setAmount}
-                list={list}
-                setList={setList}
-                total={total}
-                setTotal={setTotal}
-                tax={tax}
-                setTax={setTax}
-              />
-            </article>
-
-            <label htmlFor="notes">Additional Notes</label>
-            <textarea
-              cols="30"
-              rows="10"
-              name="notes"
-              id="notes"
-              placeholder="Additional Notes to the client"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-            ></textarea>
-
-            <button
-              className="bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
-              onClick={() => setShowInvoice(true)}
-            >
-              Preview Invoice
-            </button>
-          </div>
+          <InfoForm
+            name={name}
+            setName={setName}
+            address={address}
+            setAddress={setAddress}
+            email={email}
+            setEmail={setEmail}
+            phone={phone}
+            setPhone={setPhone}
+            website={website}
+            setWebsite={setWebsite}
+            bankName={bankName}
+            setBankName={setBankName}
+            bankAccount={bankAccount}
+            setBankAccount={setBankAccount}
+            clientName={clientName}
+            setClientName={setClientName}
+            clientAddress={clientAddress}
+            setClientAddress={setClientAddress}
+            invoiceNumber={invoiceNumber}
+            setInvoiceNumber={setInvoiceNumber}
+            invoiceDate={invoiceDate}
+            setInvoiceDate={setInvoiceDate}
+            dueDate={dueDate}
+            setDueDate={setDueDate}
+            description={description}
+            setDescription={setDescription}
+            quntity={quntity}
+            setQuntity={setQuntity}
+            price={price}
+            setPrice={setPrice}
+            amount={amount}
+            setAmount={setAmount}
+            total={total}
+            setTotal={setTotal}
+            tax={tax}
+            setTax={setTax}
+            list={list}
+            setList={setList}
+            notes={notes}
+            setNotes={setNotes}
+            setShowInvoice={setShowInvoice}
+          />
         )}
       </main>
     </>

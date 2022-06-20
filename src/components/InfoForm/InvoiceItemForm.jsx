@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Table from "./Table";
+import Table from "../Table";
 import { v4 as uuid } from "uuid";
+import { useTranslation } from "react-i18next";
 
 function TableForm({
   description,
@@ -18,6 +19,7 @@ function TableForm({
   tax,
   setTax,
 }) {
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     setAmount(price * quntity);
@@ -69,15 +71,15 @@ function TableForm({
     setPrice(editingRow.price);
   };
   return (
-    <>
+    <article className="mb-10">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col md:mt-16">
-          <label htmlFor="description">Item description</label>
+          <label htmlFor="description">{t("description")}</label>
           <input
             type="text"
             name="description"
             id="description"
-            placeholder="Item description"
+            placeholder={t("description")}
             autoComplete="off"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -85,31 +87,31 @@ function TableForm({
         </div>
         <div className="md:grid grid-cols-3 gap-10">
           <div className="flex flex-col">
-            <label htmlFor="quntity">Quntity</label>
+            <label htmlFor="quntity">{t("quntity")}</label>
             <input
               type="number"
               name="quntity"
               id="quntity"
-              placeholder="Quntity"
+              placeholder={t("quntity")}
               autoComplete="off"
               value={quntity}
               onChange={(e) => setQuntity(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="price">Price</label>
+            <label htmlFor="price">{t("price")}</label>
             <input
               type="number"
               name="price"
               id="price"
-              placeholder="Price"
+              placeholder={t("price")}
               autoComplete="off"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="amount">Amount</label>
+            <label htmlFor="amount">{t("amount")}</label>
             <p>{amount.toLocaleString()}</p>
           </div>
         </div>
@@ -118,14 +120,14 @@ function TableForm({
             className="mb-5 bg-green-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-green-500 hover:bg-transparent hover:text-green-500 transition-all duration-300"
             type="submit"
           >
-            Update item
+            {t("update-item")}
           </button>
         ) : (
           <button
             className="mb-5 bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
             type="submit"
           >
-            Add item
+            {t("add-item")}
           </button>
         )}
       </form>
@@ -137,7 +139,7 @@ function TableForm({
         deleteRow={deleteRow}
         tax={tax}
       />
-    </>
+    </article>
   );
 }
 

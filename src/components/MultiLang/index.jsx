@@ -22,7 +22,9 @@ function MultiLang() {
                       Lanuages[i18n.language].country_code
                     }`}
                   ></span>{" "}
-                  <span style={{ color: "#5139B8" }}>{i18n.language}</span>
+                  <span style={{ color: "#5139B8" }}>
+                    {Lanuages[i18n.language].code}
+                  </span>
                 </b>
                 <FaAngleDown style={{ color: "#5139B8" }} className="mt-1" />
               </div>
