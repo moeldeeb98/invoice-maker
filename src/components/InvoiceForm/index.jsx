@@ -1,58 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import InvoiceItemForm from "./InvoiceItemForm";
-import Header from "./Header";
+import FormHeader from "./FormHeader";
 import InvoiceInfo from "./InvoiceInfo";
 import RecipientInfo from "./RecipientInfo";
 import SenderInfo from "./SenderInfo";
 
-function InfoForm({
-  name,
-  setName,
-  address,
-  setAddress,
-  email,
-  setEmail,
-  phone,
-  setPhone,
-  website,
-  setWebsite,
-  bankName,
-  setBankName,
-  bankAccount,
-  setBankAccount,
-  clientName,
-  setClientName,
-  clientAddress,
-  setClientAddress,
-  invoiceNumber,
-  setInvoiceNumber,
-  invoiceDate,
-  setInvoiceDate,
-  dueDate,
-  setDueDate,
-  description,
-  setDescription,
-  quntity,
-  setQuntity,
-  price,
-  setPrice,
-  amount,
-  setAmount,
-  total,
-  setTotal,
-  tax,
-  setTax,
-  list,
-  setList,
-  notes,
-  setNotes,
-  setShowInvoice,
-}) {
+import {
+  dispatchSenderInfo,
+  dispatchClientInfo,
+  dispatchCoreInfo,
+} from "../../redux/invoice";
+
+function InvoiceForm({ setShowInvoice }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [bankAccount, setBankAccount] = useState("");
+  const [website, setWebsite] = useState("");
+  const [clientName, setClientName] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [invoiceNumber, setInvoiceNumber] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [notes, setNotes] = useState("");
+  const [total, setTotal] = useState(0);
+  const [tax, setTax] = useState(0);
+
+  const handlePreviewClick = () => {
+    dispatch(
+      dispatchSenderInfo({
+        name,
+        address,
+        email,
+        phone,
+        bankName,
+        bankAccount,
+        website,
+      })
+    );
+    dispatch(
+      dispatchClientInfo({
+        clientName,
+        clientAddress,
+      })
+    );
+    dispatch(
+      dispatchCoreInfo({
+        invoiceNumber,
+        invoiceDate,
+        dueDate,
+        notes,
+        total,
+        tax,
+      })
+    );
+    setShowInvoice(true);
+  };
+
   return (
     <div className="flex flex-col justify-center">
-      <Header />
+      <FormHeader />
 
       <SenderInfo
         name={name}
@@ -88,16 +102,6 @@ function InfoForm({
       />
 
       <InvoiceItemForm
-        description={description}
-        setDescription={setDescription}
-        quntity={quntity}
-        setQuntity={setQuntity}
-        price={price}
-        setPrice={setPrice}
-        amount={amount}
-        setAmount={setAmount}
-        list={list}
-        setList={setList}
         total={total}
         setTotal={setTotal}
         tax={tax}
@@ -116,7 +120,7 @@ function InfoForm({
 
       <button
         className="bg-blue-500 text-white font-bold py-2 px-8 rounded shadow border-2 border-blue-500 hover:bg-transparent hover:text-blue-500 transition-all duration-300"
-        onClick={() => setShowInvoice(true)}
+        onClick={handlePreviewClick}
       >
         {t("preview-invoice")}
       </button>
@@ -124,4 +128,4 @@ function InfoForm({
   );
 }
 
-export default InfoForm;
+export default InvoiceForm;

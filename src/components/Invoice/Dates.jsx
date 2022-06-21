@@ -1,23 +1,25 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-function Dates({ invoiceNumber, invoiceDate, dueDate }) {
+function Dates() {
   const { t } = useTranslation();
+  const { core } = useSelector((state) => state.InvoiceReducer);
   return (
     <>
       <article className="mt-10 mb-14 flex items-end justify-end">
         <ul>
           <li className="p-1">
             <span className="font-bold">{t("invoice-number")}: </span>
-            {invoiceNumber}
+            {core.invoiceNumber}
           </li>
           <li className="p-1 bg-gray-100">
             <span className="font-bold">{t("invoice-date")}: </span>
-            {invoiceDate}
+            {core.invoiceDate}
           </li>
           <li className="p-1">
             <span className="font-bold">{t("due-date")}: </span>
-            {dueDate}
+            {core.dueDate}
           </li>
         </ul>
       </article>

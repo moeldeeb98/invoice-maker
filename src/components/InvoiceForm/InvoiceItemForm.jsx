@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Table from "../Table";
+import Table from "../Invoice/Table";
 import { v4 as uuid } from "uuid";
 import { useTranslation } from "react-i18next";
 
-function TableForm({
-  description,
-  setDescription,
-  quntity,
-  setQuntity,
-  price,
-  setPrice,
-  amount,
-  setAmount,
-  list,
-  setList,
-  total,
-  setTotal,
-  tax,
-  setTax,
-}) {
+import { useSelector, useDispatch } from "react-redux";
+import {
+  dispatchSetItem,
+  dispatchAppendItemToList,
+  dispatchRemoveItemFromList,
+} from "../../redux/invoice";
+
+function InvoiceItemForm({ setTotal, setTax }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { list, item } = useSelector((state) => state.InvoiceReducer);
+
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [quntity, setQuntity] = useState(1);
+  const [amount, setAmount] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     setAmount(price * quntity);
@@ -35,6 +34,14 @@ function TableForm({
     setTotal(sum + tax);
   }, [list.length]);
 
+  useEffect(() => {
+    if (isEditing) {
+      setDescription(item.description);
+      setQuntity(item.quntity);
+      setPrice(item.price);
+    }
+  }, [isEditing]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!description || !price || !quntity) {
@@ -48,27 +55,23 @@ function TableForm({
         price,
       };
 
-      setDescription("");
-      setQuntity(1);
-      setPrice(0);
-
-      setList([...list, newItem]);
+      dispatch(dispatchAppendItemToList(newItem));
       setIsEditing(false);
+      setDescription("");
+      setPrice(0);
+      setQuntity(1);
     }
   };
 
   const deleteRow = (id) => {
-    const deletingRow = list.find((row) => row.id === id);
-    setList(list.filter((row) => row.id !== id));
+    dispatch(dispatchRemoveItemFromList(id));
   };
 
   const editRow = (id) => {
     const editingRow = list.find((row) => row.id === id);
     setIsEditing(true);
-    setList(list.filter((row) => row.id !== id));
-    setDescription(editingRow.description);
-    setQuntity(editingRow.quntity);
-    setPrice(editingRow.price);
+    dispatch(dispatchSetItem(editingRow));
+    dispatch(dispatchRemoveItemFromList(id));
   };
   return (
     <article className="mb-10">
@@ -131,16 +134,9 @@ function TableForm({
           </button>
         )}
       </form>
-      <Table
-        hasActions={true}
-        list={list}
-        total={total}
-        editRow={editRow}
-        deleteRow={deleteRow}
-        tax={tax}
-      />
+      <Table hasActions={true} editRow={editRow} deleteRow={deleteRow} />
     </article>
   );
 }
 
-export default TableForm;
+export default InvoiceItemForm;

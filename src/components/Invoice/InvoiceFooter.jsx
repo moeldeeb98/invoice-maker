@@ -1,40 +1,42 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-function Footer({ name, email, phone, bankName, bankAccount, website }) {
+function InvoiceFooter() {
   const { t } = useTranslation();
+  const { sender } = useSelector((state) => state.InvoiceReducer);
   return (
     <>
       <footer className="footer border-t-2 border-gray-300 pt-5">
         <ul className="flex flex-wrap items-center justify-center">
           <li>
             <span className="font-bold">{t("name")}: </span>
-            {name}
+            {sender.name}
           </li>
           <li>
             <span className="font-bold">{t("email")}: </span>
-            {email}
+            {sender.email}
           </li>
           <li>
             <span className="font-bold">{t("phone")}: </span>
-            {phone}
+            {sender.phone}
           </li>
           <li>
             <span className="font-bold">{t("bank")}: </span>
-            {bankName}
+            {sender.bankName}
           </li>
           <li>
             <span className="font-bold">{t("account-holder")}: </span>
-            {name}
+            {sender.name}
           </li>
           <li>
             <span className="font-bold">{t("bank-account")}: </span>
-            {bankAccount}
+            {sender.bankAccount}
           </li>
           <li>
             <span className="font-bold">{t("website")}: </span>
-            <a href={website} target="_blank" rel="noopenner noreferrer">
-              {website}
+            <a href={sender.website} target="_blank" rel="noopenner noreferrer">
+              {sender.website}
             </a>
           </li>
         </ul>
@@ -43,4 +45,4 @@ function Footer({ name, email, phone, bankName, bankAccount, website }) {
   );
 }
 
-export default Footer;
+export default InvoiceFooter;

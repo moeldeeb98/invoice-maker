@@ -1,9 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
-function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
+function Table({ hasActions, editRow, deleteRow }) {
   const { t } = useTranslation();
+  const { list, core } = useSelector((state) => state.InvoiceReducer);
   return (
     <>
       <table width="100%">
@@ -50,7 +52,7 @@ function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
               {t("tax-14")} :
             </td>
             <td className="font-bold text-center border border-gray-400">
-              E&pound; {tax.toLocaleString()}
+              E&pound; {core.tax?.toLocaleString()}
             </td>
           </tr>
           <tr>
@@ -59,16 +61,11 @@ function Table({ hasActions, list, total, editRow, deleteRow, tax }) {
               {t("sub-total")} :
             </td>
             <td className="font-bold text-center border border-gray-400">
-              E&pound; {total.toLocaleString()}
+              E&pound; {core.total?.toLocaleString()}
             </td>
           </tr>
         </tbody>
       </table>
-      {/* <div>
-        <h2 className="flex items-end justify-end text-gray-800 font-bold text-2xl my-2">
-          Total. {total.toLocaleString()}
-        </h2>
-      </div> */}
     </>
   );
 }
