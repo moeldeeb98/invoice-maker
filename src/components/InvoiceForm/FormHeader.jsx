@@ -5,7 +5,7 @@ function Header() {
     <div className="flex items-center justify-between mb-5">
       <div>
         <img
-          src="/images/logo.png"
+          src="images/logo.png"
           className="md:w-20 w-10"
           alt="INVOICE MAKER"
         />

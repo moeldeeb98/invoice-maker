@@ -19,11 +19,11 @@ function MultiLang() {
                 <b>
                   <span
                     className={`flag fi fi-${
-                      Lanuages[i18n.language].country_code
+                      Lanuages[i18n.language]?.country_code
                     }`}
                   ></span>{" "}
                   <span style={{ color: "#5139B8" }}>
-                    {Lanuages[i18n.language].code}
+                    {Lanuages[i18n.language]?.code}
                   </span>
                 </b>
                 <FaAngleDown style={{ color: "#5139B8" }} className="mt-1" />
@@ -36,7 +36,7 @@ function MultiLang() {
                   }}
                 >
                   <span
-                    className={`flag fi fi-${Lanuages["en"].country_code}`}
+                    className={`flag fi fi-${Lanuages["en"]?.country_code}`}
                   ></span>
                   <span className={`${i18n.language == "en" ? "active" : ""} `}>
                     {Lanuages["en"].name}
@@ -48,7 +48,7 @@ function MultiLang() {
                   }}
                 >
                   <span
-                    className={`flag fi fi-${Lanuages["ar"].country_code}`}
+                    className={`flag fi fi-${Lanuages["ar"]?.country_code}`}
                   ></span>
                   <span className={`${i18n.language == "ar" ? "active" : ""} `}>
                     {Lanuages["ar"].name}
