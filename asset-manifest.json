@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://moeldeeb98.github.io/invoice-maker/static/css/main.48e7bc83.css",
-    "main.js": "https://moeldeeb98.github.io/invoice-maker/static/js/main.c905815f.js",
+    "main.js": "https://moeldeeb98.github.io/invoice-maker/static/js/main.933afd12.js",
     "static/media/do.svg": "https://moeldeeb98.github.io/invoice-maker/static/media/do.3ecb625b75ec64be4376.svg",
     "static/media/rs.svg": "https://moeldeeb98.github.io/invoice-maker/static/media/rs.9f00a7d8eafa6f593713.svg",
     "static/media/bo.svg": "https://moeldeeb98.github.io/invoice-maker/static/media/bo.88ba0b0a7e48ec71eca8.svg",
@@ -270,10 +270,10 @@
     "static/media/de.svg": "https://moeldeeb98.github.io/invoice-maker/static/media/de.6435bf24d148ca7248e7.svg",
     "static/media/bd.svg": "https://moeldeeb98.github.io/invoice-maker/static/media/bd.0ad8c443ef4d47ea0497.svg",
     "main.48e7bc83.css.map": "https://moeldeeb98.github.io/invoice-maker/static/css/main.48e7bc83.css.map",
-    "main.c905815f.js.map": "https://moeldeeb98.github.io/invoice-maker/static/js/main.c905815f.js.map"
+    "main.933afd12.js.map": "https://moeldeeb98.github.io/invoice-maker/static/js/main.933afd12.js.map"
   },
   "entrypoints": [
     "static/css/main.48e7bc83.css",
-    "static/js/main.c905815f.js"
+    "static/js/main.933afd12.js"
   ]
 }
